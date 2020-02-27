@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+<!-- block containt -->
+{% block content %} this is Home page
+<!-- Showing User informations who login  -->
+
+{% if user.is_authenticated %}
+<br> Wellcome Mr. {{user.username }} {% else %}
+<p>No One Login </p>
+{% endif %} {% endblock %}
