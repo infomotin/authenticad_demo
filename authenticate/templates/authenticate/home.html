@@ -4,6 +4,8 @@
 <!-- Showing User informations who login  -->
 
 {% if user.is_authenticated %}
-<br> Wellcome Mr. {{user.username }} {% else %}
+<br> Wellcome Mr. {{user.username }}
+<br> Your Full Name :{{user.first_name}} {{user.last_name}}
+<br> Email Address . {{user.email }} {% else %}
 <p>No One Login </p>
 {% endif %} {% endblock %}
