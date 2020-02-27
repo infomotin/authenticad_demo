@@ -1,6 +1,23 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm,UserChangeForm,PasswordChangeForm
 from django import forms
 from django.contrib.auth.models import User
+
+class PasswordChangF(PasswordChangeForm):
+    class Meta:
+        model = User
+        fields = ('username','first_name','last_name','email','password')
+    # def __init__(self,*args,**kwargs):
+    #     super(PasswordChangeForm,self).__init__(*args,**kwargs)
+    #     self.fields['username'].widget.attrs['class']='form-control'
+    #     #self.fields['username'].widget.attrs['helptext']=''
+    #     self.fields['username'].label =''
+    #     self.fields['username'].help_text =''
+    #     self.fields['username'].widget.attrs['placeholder'] ='User Name'
+    # password = forms.EmailField(label="",help_text="" ,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Your Email Address'}))
+    # password1 = forms.CharField(label="",help_text="" ,max_length=100,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Your First Name'}))
+    # password2 = forms.CharField(label="",help_text="",max_length=100,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Your Last Name'}))
+    
+
 
 class RegisterForm(UserCreationForm):
     def __init__(self,*args,**kwargs):
@@ -28,4 +45,17 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username','first_name','last_name','email','password1','password2',)
-    
+class EditForm(UserChangeForm):
+    def __init__(self,*args,**kwargs):
+        super(UserChangeForm,self).__init__(*args,**kwargs)
+        self.fields['username'].widget.attrs['class']='form-control'
+        #self.fields['username'].widget.attrs['helptext']=''
+        self.fields['username'].label =''
+        self.fields['username'].help_text =''
+    class Meta:
+        model = User
+        fields = ('username','first_name','last_name','email','password')
+    email = forms.EmailField(label="",help_text="" ,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Your Email Address'}))
+    first_name = forms.CharField(label="",help_text="" ,max_length=100,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Your First Name'}))
+    last_name = forms.CharField(label="",help_text="",max_length=100,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Your Last Name'}))
+
