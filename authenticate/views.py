@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib import messages
+# import form in django 
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from authenticate.forms import RegisterForm,EditForm,PasswordChangF
 
@@ -74,6 +75,7 @@ def change_password(request):
         form = PasswordChangF(data=request.POST, user=request.user)
         if form.is_valid():
             form.save()
+            # for update Session
             update_session_auth_hash(request,form.user)
             # username = form.cleaned_data['username']
             # password = form.cleaned_data['password1']

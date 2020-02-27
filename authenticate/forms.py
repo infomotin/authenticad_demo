@@ -18,9 +18,10 @@ class PasswordChangF(PasswordChangeForm):
     # password2 = forms.CharField(label="",help_text="",max_length=100,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Your Last Name'}))
     
 
-
+# inheritet UserChangeForm on EditForm 
 class RegisterForm(UserCreationForm):
     def __init__(self,*args,**kwargs):
+        # called Supper Class parrent class inherited with RegisterForm
         super(RegisterForm,self).__init__(*args,**kwargs)
         self.fields['username'].widget.attrs['class']='form-control'
         #self.fields['username'].widget.attrs['helptext']=''
@@ -39,15 +40,23 @@ class RegisterForm(UserCreationForm):
         #self.fields['password2'].widget.attrs['helptext']=''
         self.fields['password2'].label =''
         self.fields['password2'].help_text =''
+
+    # changeing Form attre 
     email = forms.EmailField(label="",help_text="" ,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Your Email Address'}))
     first_name = forms.CharField(label="",help_text="" ,max_length=100,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Your First Name'}))
     last_name = forms.CharField(label="",help_text="",max_length=100,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Your Last Name'}))
+    
+    # inheritet User Model 
     class Meta:
         model = User
         fields = ('username','first_name','last_name','email','password1','password2',)
+
+# inheritet UserChangeForm on EditForm 
 class EditForm(UserChangeForm):
+    password = forms.EmailField(label="",help_text="" ,widget=forms.TextInput(attrs={'type':'hidden'}))
     def __init__(self,*args,**kwargs):
-        super(UserChangeForm,self).__init__(*args,**kwargs)
+        # called Supper Class parrent class inherited with EditForm
+        super(EditForm,self).__init__(*args,**kwargs)
         self.fields['username'].widget.attrs['class']='form-control'
         #self.fields['username'].widget.attrs['helptext']=''
         self.fields['username'].label =''
